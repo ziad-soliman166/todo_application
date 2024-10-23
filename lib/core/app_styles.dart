@@ -7,6 +7,6 @@ class LightAppStyles {
       fontSize: 22, fontWeight: FontWeight.w700, color: ColorsManager.white);
   static TextStyle ThemeLabel =
       GoogleFonts.poppins(fontSize: 19, fontWeight: FontWeight.w700);
-  static TextStyle SelectedThemeLabel = GoogleFonts.inter(
+  static TextStyle SelectedItemLabel = GoogleFonts.inter(
       fontSize: 15, fontWeight: FontWeight.w400, color: ColorsManager.blue);
 }

@@ -11,6 +11,7 @@ class SettingsTab extends StatefulWidget {
 
 class _SettingsTabState extends State<SettingsTab> {
   String selectedTheme = 'Light';
+  String selectedLanguage = 'English';
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +39,16 @@ class _SettingsTabState extends State<SettingsTab> {
               children: [
                 Text(
                   selectedTheme,
-                  style: LightAppStyles.SelectedThemeLabel,
+                  style: LightAppStyles.SelectedItemLabel,
                 ),
-                buildDropDown(
-                  item: MenuItem(item1: 'Light', item2: 'Dark'),
+                buildDropDownTheme(
+                  item: MenuItem(item1: "Light", item2: "Dark"),
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: 35,
+          const SizedBox(
+            height: 30,
           ),
           Text(
             "Language",
@@ -67,11 +68,11 @@ class _SettingsTabState extends State<SettingsTab> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  selectedTheme,
-                  style: LightAppStyles.SelectedThemeLabel,
+                  selectedLanguage,
+                  style: LightAppStyles.SelectedItemLabel,
                 ),
-                buildDropDown(
-                  item: MenuItem(item1: 'English', item2: 'Arabic'),
+                buildDropDownLang(
+                  item: MenuItem(item1: "English", item2: "Arabic"),
                 ),
               ],
             ),
@@ -81,9 +82,9 @@ class _SettingsTabState extends State<SettingsTab> {
     );
   }
 
-  Widget buildDropDown({required MenuItem item}) => DropdownButton<String>(
+  Widget buildDropDownTheme({required MenuItem item}) => DropdownButton<String>(
         borderRadius: BorderRadius.circular(20),
-        underline: SizedBox(),
+        underline: const SizedBox(),
         items: <String>[item.item1, item.item2].map((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -92,6 +93,20 @@ class _SettingsTabState extends State<SettingsTab> {
         }).toList(),
         onChanged: (newTheme) {
           selectedTheme = newTheme ?? selectedTheme;
+          setState(() {});
+        },
+      );
+  Widget buildDropDownLang({required MenuItem item}) => DropdownButton<String>(
+        borderRadius: BorderRadius.circular(20),
+        underline: const SizedBox(),
+        items: <String>[item.item1, item.item2].map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (newLang) {
+          selectedLanguage = newLang ?? selectedLanguage;
           setState(() {});
         },
       );
