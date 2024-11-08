@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_application/core/app_styles.dart';
 import 'package:todo_application/core/colors_manager.dart';
+import 'package:todo_application/settings_provider.dart';
 
 class SettingsTab extends StatefulWidget {
-  SettingsTab({super.key});
+  const SettingsTab({Key? key}) : super(key: key);
 
   @override
   State<SettingsTab> createState() => _SettingsTabState();
@@ -15,18 +18,21 @@ class _SettingsTabState extends State<SettingsTab> {
 
   @override
   Widget build(BuildContext context) {
+    var myProvider = Provider.of<SettingsProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Theme label
           Text(
-            "Theme",
-            style: LightAppStyles.ThemeLabel,
+            AppLocalizations.of(context)!.themeLabel,
+            style: myProvider.currentTheme == ThemeMode.light
+                ? LightAppStyles.ThemeLabel
+                : LightAppStyles.ThemeLabelDark,
           ),
-          const SizedBox(
-            height: 9,
-          ),
+          const SizedBox(height: 9),
           Container(
             height: 48,
             padding: const EdgeInsets.all(8),
@@ -43,20 +49,26 @@ class _SettingsTabState extends State<SettingsTab> {
                 ),
                 buildDropDownTheme(
                   item: MenuItem(item1: "Light", item2: "Dark"),
+                  onChanged: (newTheme) {
+                    selectedTheme = newTheme ?? selectedTheme;
+                    myProvider.changeAppTheme(
+                      newTheme == "Light" ? ThemeMode.light : ThemeMode.dark,
+                    );
+                    setState(() {});
+                  },
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
+          // Language label
           Text(
-            "Language",
-            style: LightAppStyles.ThemeLabel,
+            AppLocalizations.of(context)!.languageLabel,
+            style: myProvider.currentTheme == ThemeMode.light
+                ? LightAppStyles.ThemeLabel
+                : LightAppStyles.ThemeLabelDark,
           ),
-          const SizedBox(
-            height: 9,
-          ),
+          const SizedBox(height: 9),
           Container(
             height: 48,
             padding: const EdgeInsets.all(8),
@@ -73,6 +85,12 @@ class _SettingsTabState extends State<SettingsTab> {
                 ),
                 buildDropDownLang(
                   item: MenuItem(item1: "English", item2: "Arabic"),
+                  onChanged: (newLang) {
+                    selectedLanguage = newLang ?? selectedLanguage;
+                    myProvider
+                        .changeAppLanguage(newLang == "English" ? 'en' : 'ar');
+                    setState(() {});
+                  },
                 ),
               ],
             ),
@@ -82,7 +100,10 @@ class _SettingsTabState extends State<SettingsTab> {
     );
   }
 
-  Widget buildDropDownTheme({required MenuItem item}) => DropdownButton<String>(
+  // Dropdown for Theme Selection
+  Widget buildDropDownTheme(
+          {required MenuItem item, required Function(String?) onChanged}) =>
+      DropdownButton<String>(
         borderRadius: BorderRadius.circular(20),
         underline: const SizedBox(),
         items: <String>[item.item1, item.item2].map((String value) {
@@ -91,12 +112,13 @@ class _SettingsTabState extends State<SettingsTab> {
             child: Text(value),
           );
         }).toList(),
-        onChanged: (newTheme) {
-          selectedTheme = newTheme ?? selectedTheme;
-          setState(() {});
-        },
+        onChanged: onChanged,
       );
-  Widget buildDropDownLang({required MenuItem item}) => DropdownButton<String>(
+
+  // Dropdown for Language Selection
+  Widget buildDropDownLang(
+          {required MenuItem item, required Function(String?) onChanged}) =>
+      DropdownButton<String>(
         borderRadius: BorderRadius.circular(20),
         underline: const SizedBox(),
         items: <String>[item.item1, item.item2].map((String value) {
@@ -105,10 +127,7 @@ class _SettingsTabState extends State<SettingsTab> {
             child: Text(value),
           );
         }).toList(),
-        onChanged: (newLang) {
-          selectedLanguage = newLang ?? selectedLanguage;
-          setState(() {});
-        },
+        onChanged: onChanged,
       );
 }
 
