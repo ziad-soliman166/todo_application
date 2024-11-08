@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_application/core/assets_manager.dart';
 import 'package:todo_application/core/routes_manager.dart';
+import 'package:todo_application/settings_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,8 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var myProvider = Provider.of<SettingsProvider>(context);
     return Container(
-      child: Image.asset(AssetsManager.splashScreenLight),
+      child: myProvider.currentTheme == ThemeMode.light
+          ? Image.asset(AssetsManager.splashScreenLight)
+          : Image.asset(AssetsManager.splashScreenDark),
     );
   }
 }

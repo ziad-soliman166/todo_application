@@ -1,0 +1,17 @@
+{
+  "@@locale": "ar",
+  "appTitle": "تطبيق المهام",
+  "settingsTitle": "الإعدادات",
+  "delete": "مسح",
+  "themeLabel": "السمة",
+  "languageLabel": "اللغة",
+  "lightTheme": "فاتح",
+  "darkTheme": "داكن",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "addTask": "إضافة مهمة",
+  "editTask": "تعديل المهمة",
+  "taskTitle": "عنوان المهمة",
+  "taskDescription": "وصف المهمة",
+  "saveChanges": "حفظ التغييرات"
+}

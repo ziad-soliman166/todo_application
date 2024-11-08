@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "appTitle": "To Do Application",
+  "tasksTitle": "Tasks",
+  "delete": "Delete",
+  "settingsTitle": "Settings",
+  "themeLabel": "Theme",
+  "languageLabel": "Language",
+  "lightTheme": "Light",
+  "darkTheme": "Dark",
+  "english": "English",
+  "arabic": "Arabic",
+  "addTask": "Add Task",
+  "editTask": "Edit Task",
+  "taskTitle": "Task Title",
+  "taskDescription": "Task Description",
+  "saveChanges": "Save Changes"
+}
