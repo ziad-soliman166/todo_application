@@ -5,6 +5,7 @@ import 'package:todo_application/presentations/splash_screen/splash_screen.dart'
 class RoutesManager {
   static const String homeRoute = "/home";
   static const String SplashRoute = "/splash";
+  static const String editRoute = "/splash";
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -13,6 +14,10 @@ class RoutesManager {
           builder: (context) => SplashScreen(),
         );
       case homeRoute:
+        return MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        );
+      case editRoute:
         return MaterialPageRoute(
           builder: (context) => HomeScreen(),
         );
