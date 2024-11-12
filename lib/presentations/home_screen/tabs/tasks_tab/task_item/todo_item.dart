@@ -8,7 +8,7 @@ import 'package:todo_application/core/colors_manager.dart';
 import 'package:todo_application/database_manager/model/todo_dm.dart';
 import 'package:todo_application/settings_provider.dart';
 
-import '../../../add_tasks_bottom_sheet/add_tasks_bottom_sheet.dart';
+import '../../../../edit_screen/edit_screen.dart';
 
 class TodoItem extends StatelessWidget {
   TodoItem(
@@ -60,9 +60,13 @@ class TodoItem extends StatelessWidget {
                 topRight: Radius.circular(15),
                 bottomRight: Radius.circular(15),
               ),
-              onPressed: (context) async {
-                await AddTasksBottomSheet.show(context, task: todo);
-                onEditedTask(); // Refresh the list after editing
+              onPressed: (context) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditScreen(task: todo),
+                  ),
+                ).then((_) => onEditedTask());
               },
               backgroundColor: ColorsManager.blue,
               foregroundColor: Colors.white,
